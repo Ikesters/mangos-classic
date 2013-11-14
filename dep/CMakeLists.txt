@@ -1,5 +1,4 @@
-#
-# This file is part of the CMaNGOS Project. See AUTHORS file for Copyright information
+#This file is part of the CMaNGOS Project. See AUTHORS file for Copyright information
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,6 +20,10 @@ endif()
 
 if(NOT ACE_USE_EXTERNAL)
   add_subdirectory(ACE_wrappers)
+endif()
+
+if(ELUNA)
+  add_subdirectory(lualib)
 endif()
 
 add_subdirectory(recastnavigation)

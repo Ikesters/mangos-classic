@@ -25,6 +25,11 @@ if(WIN32)
   )
 endif()
 
+if(ELUNA)
+  add_subdirectory(LuaEngine)
+  file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/bin/Release/scripts)
+endif(ELUNA)
+
 add_subdirectory(bindings)
 add_subdirectory(framework)
 add_subdirectory(shared)

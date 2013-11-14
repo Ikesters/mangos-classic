@@ -31,6 +31,8 @@
 #include "BattleGround/BattleGround.h"
 #include "OutdoorPvP/OutdoorPvP.h"
 #include "WaypointMovementGenerator.h"
+#include "HookMgr.h"
+#include "LuaEngine.h"
 
 #include "revision_nr.h"
 
@@ -1953,6 +1955,10 @@ char const* ScriptMgr::GetScriptLibraryVersion() const
 
 CreatureAI* ScriptMgr::GetCreatureAI(Creature* pCreature)
 {
+#ifdef ELUNA
+    if(CreatureAI* luaAI = sEluna.LuaCreatureAI->GetAI(pCreature))
+        return luaAI;
+#endif
     if (!m_pGetCreatureAI)
         return NULL;
 

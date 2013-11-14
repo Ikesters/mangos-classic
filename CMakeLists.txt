@@ -29,6 +29,7 @@ set(CMAKE_MODULE_PATH
 option(DEBUG                "Debug mode"                            OFF)
 option(TBB_USE_EXTERNAL     "Use external TBB"                      OFF)
 option(USE_STD_MALLOC       "Use standard malloc instead of TBB"    OFF)
+option(ELUNA                "Build Eluna Lua Engine"                ON)
 option(ACE_USE_EXTERNAL     "Use external ACE"                      OFF)
 if(PCHSupport_FOUND AND WIN32) # TODO: why only enable it on windows by default?
   option(PCH                "Use precompiled headers"               ON)
@@ -56,6 +57,7 @@ message(
     TBB_USE_EXTERNAL        Use external TBB
     USE_STD_MALLOC          Use standard malloc instead of TBB
     ACE_USE_EXTERNAL        Use external ACE
+	ELUNA                   Build Eluna Lua Engine
   To set an option simply type -D<OPTION>=<VALUE> after 'cmake <srcs>'.
   Also, you can specify the generator with -G. see 'cmake --help' for more details
   For example: cmake .. -DDEBUG=1 -DCMAKE_INSTALL_PREFIX=/opt/mangos"
@@ -256,6 +258,13 @@ if(PCH)
   message(STATUS "Use PCH               : Yes")
 else()
   message(STATUS "Use PCH               : No")
+endif()
+
+if(ELUNA)
+  message("* Build Eluna LuaEngine   : Yes (default)")
+  add_definitions(-DELUNA)
+else()
+  message("* Build Eluna LuaEngine   : No")
 endif()
 
 if(DEBUG)

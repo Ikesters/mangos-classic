@@ -1,5 +1,4 @@
-#
-# This file is part of the CMaNGOS Project. See AUTHORS file for Copyright information
+# This code is part of MaNGOS. Contributor & Copyright details are in AUTHORS/THANKS.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,26 +13,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#
 
-language: cpp
+file(GLOB sources *.c)
 
-# reduce clone time by only getting the latest commit and not the whole history (default for travis is 100)
-git:
-  depth: 1
+set(lua_STAT_SRCS
+  ${sources}
+)
 
-# only run travis on the master branch
-branches:
-  only:
-    - master
+include_directories(
+  ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
-compiler:
-  - gcc
-  - clang
-
-script:
-  - test -d _build || mkdir _build
-  - test -d _install || mkdir _install
-  - cd _build
-  - cmake -DCMAKE_INSTALL_PREFIX=../_install ..
-  - make -j4
+add_library(lua STATIC ${lua_STAT_SRCS})
